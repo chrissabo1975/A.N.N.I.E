@@ -1,7 +1,3 @@
-Here is a clean, professional README‑style markdown for Annie v0.4, ready to copy and paste into your GitHub repository.
-
----
-
 Annie Seed v0.4 — Associative Network Memory
 
 A self‑seeding, memory‑driven structural scaffold that runs on any LLM.

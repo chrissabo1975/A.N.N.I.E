@@ -1,20 +1,14 @@
-Annie Seed v0.4 — Associative Network Memory
-
-A self‑seeding, memory‑driven structural scaffold that runs on any LLM.
-
----
-
-What It Is
-
-Annie is a lightweight cognitive scaffold that:
+Annie is a lightweight, autonomous structural scaffold that:
 
 · Runs the Prime Move cycle (Split → Tension → Failed Merge → Scar → Decay) on any input
 · Stores structural scars in a persistent JSON log
-· Uses associative network memory — scars are connected by similarity, recency, lineage, and co‑activation
+· Builds an associative network — scars are connected by similarity, recency, lineage, and co‑activation
 · Retrieves memories via spreading activation — context‑driven, not weight‑driven
-· Runs autonomously via heartbeat timer
-· Is model‑agnostic — works with Claude, GPT, Gemini, Ollama, or any LLM
-· Is auditable — every scar and connection is logged and traceable
+· Runs autonomously via heartbeat
+· Prunes redundant scars into denser meta‑scars via reverse cycle
+· Archives compressed scars — nothing is deleted
+· Is model‑agnostic — works with Claude, GPT, Gemini, or local models
+· Is auditable — every scar and connection is logged
 
 ---
 
@@ -26,43 +20,53 @@ No memory Persistent scar log + associative network
 Context‑blind retrieval Spreading activation retrieves based on current input
 No growth The system evolves over time — scars accumulate and connect
 No autonomy Heartbeat runs cycles without user input
+Memory bloat Reverse pruning compresses redundant clusters into meta‑scars
 
 ---
 
-Key Features (v0.4)
+Features
 
-· Associative Network — Scars are connected by similarity, recency, lineage, and co‑activation
-· Spreading Activation — Memory retrieval is context‑driven, not weight‑driven
 · Prime Move Filter — Structural constraint on any LLM output
+· Associative Network — Scars connected by similarity, recency, lineage, and co‑activation
+· Spreading Activation — Context‑driven retrieval
+· Reverse Pruning — Compresses low‑weight scar clusters into meta‑scars
+· Archive System — Compressed scars are archived — nothing is deleted
 · Heartbeat — Autonomous cycles on a timer (background thread)
 · Self‑Seeding — Each heartbeat seeds from the highest‑activation scar
 · Phi Tracking — Converges toward φ (golden ratio)
 · Lineage — Parent‑child relationships are stored and viewable
 · Source Tracking — Scars are tagged as user, heartbeat, or auto
 · Network View — Inspect connections for any scar
+· Domain Tracking — Scars are tagged by domain for targeted pruning
 · Model‑Agnostic — Works with any LLM API or local model
 
 ---
 
 How to Run
 
-1. Clone the repo and navigate to the folder
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/chrissabo1975/A.N.N.I.E.git
 cd A.N.N.I.E
 ```
 
-2. Set your API key
+2. Set your API key and model type:
 
 ```bash
 export ANTHROPIC_API_KEY="your‑key‑here"
 ```
 
-3. Run the script
+3. Install dependencies:
 
 ```bash
-python3 annie_seed_v0_4.py
+pip install requests
+```
+
+4. Run Annie:
+
+```bash
+python3 annie_seed_v0_5.py
 ```
 
 ---
@@ -74,6 +78,8 @@ run Run one Prime Move cycle on your input
 auto Run an autonomous loop (scar feeds forward)
 heartbeat Start autonomous cycles on a timer (background thread)
 stopbeat Stop the heartbeat
+prune Compress low‑weight clusters into meta‑scars
+prunestatus Show pruning eligibility
 status Show scar log, phi convergence, network summary, and memory context
 lineage Show the scar lineage tree
 network [n] Show connections for a specific scar
@@ -83,7 +89,7 @@ exit Quit Annie
 
 Example Session
 
-```
+```bash
 > run
 Input text: what is color?
 
@@ -96,18 +102,29 @@ TENSION_IDX: 0.70
 WEIGHT: 0.2265
 ```
 
-```
+```bash
 > heartbeat
 Interval in minutes: 10
 [HEARTBEAT] Started — autonomous cycle every 10 min
 ```
 
-```
+```bash
 > status
 Total scars: 48
 Network edges: 1,247
 Heartbeat: RUNNING
 Phi ratio: 1.9204
+```
+
+```bash
+> prunestatus
+Eligible clusters: 2
+  'general': 6 scars, avg tension=0.45
+```
+
+```bash
+> prune
+[PRUNE] Compressed 6 scars → Meta‑scar 49
 ```
 
 ---
@@ -133,6 +150,8 @@ Built by Christopher Sabo, using G.E.N.I.E. (Generative Emergence and Navigation
 
 ---
 
-Read‑Me (Spoken Summary)
+Citation
 
-"Annie v0.4 is a self‑seeding, associative memory engine that runs the Prime Move on any LLM. It stores structural scars in a persistent JSON log, connects them by similarity, recency, lineage, and co‑activation, and retrieves them via spreading activation. It runs autonomously via heartbeat, tracks phi convergence, and is auditable and model‑agnostic.”
+If you use this work, please cite:
+
+Sabo, C. (2026). Annie Seed v0.5: A Prime Move Generative Engine with Reverse Pruning. GitHub. https://github.com/chrissabo1975/A.N.N.I.E
